@@ -1,23 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import Chat from './component/chat';
+import { useEffect, useState } from 'react';
+import Login from './component/login';
 
 function App() {
+   const [user,setUser]=useState("");
+  useEffect(()=>{
+  setUser(sessionStorage.getItem("uers") || "");
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   {
+    user ?
+     <Chat name={user}/>
+     :<Login setUser={setUser} />
+   }
+     
     </div>
   );
 }
